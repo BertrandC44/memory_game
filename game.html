@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Sketch&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Memory Game</title>
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+</head>
+
+<body>
+    <header class="header" id="idHeader">
+        <h1 class="titre_header">MEMORY GAME</h1>
+        <nav class="tools" id="idTools">
+            <ul>
+                <li><a href="index.html" aria-valuetext="ACCUEIL">ACCUEIL</a></li>
+                <li><a href="inscription.html" aria-valuetext="INSCRIPTION">S'INSCRIRE</a></li>
+                <li><a href="connexion.html" aria-valuetext="CONNEXION">CONNEXION</a></li>
+                <li><a href="profile.html" aria-valuetext="VOTRE PROFIL">PROFIL</a></li>
+                <li><a href="game.html" aria-valuetext="À VOUS DE JOUER">JOUER</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main class="mainGame">
+        <p> Bienvenue sur le site de MEMORY de l'ENI !!<br>
+            Venez jouer avec nous et faites le meilleur score possible. <br>
+            <br>
+            <span class="important">Règle du jeu :</span>
+        </p>
+        <ul>Retournez deux cartes. <br>
+            <li>Si les images sont identiques, le jeu laisse les cartes visibles</li>
+            <li>Si les images sont diffférentes, les cartes se retournent faces cachées là ou elles étaient.</li>
+            <li>La partie est terminée lorsque toutes les cartes ont été assemblées par paires</li>
+        </ul></p>
+        <!-- <label for="menu" id="id Label">Choisir une option :</label>
+        <select id="idSelect">
+            <option value="12">Jeu 12 cartes</option>
+            <option value="18">Jeu 18 cartes</option>
+            <option value="24">Jeu 24 cartes</option>
+            <option value="30">Jeu 30 cartes</option>
+        </select> -->
+
+        <div class="plateauJeu">
+
+        </div>
+    
+        <p>
+            Si vous voulez vous souvenur de votre score, inscrivez-vous via le formulaire.
+            <br>
+            Le jeu garde les 5 meilleurs scores.
+            <br>
+            Si vous voulez relancer une partie cliquez sur <span class="important">la barre d'espace</span>.
+        </p>
+    </main>
+    <footer class="footer" id="idfooter"></footer>
+    <script type="module"src="js/main.js"></script>
+    <script type="module" src="modules/shuffle.js"></script>
+    </body>
+    
+    </html>
