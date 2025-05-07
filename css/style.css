@@ -136,6 +136,18 @@ header nav a:hover {
     border-radius: 25px;
     overflow: hidden;
 }
+
+.flipped{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 16s;
+    transform-style: preserve-3d;
+}
+
+.mistery {
+    background-image: url('medias/question.png')
+}
 .flip-box-inner {
     src: local("medias/question.svg");
 }

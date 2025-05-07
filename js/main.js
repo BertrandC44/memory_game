@@ -1,89 +1,93 @@
+// const selectElement = document.getElementById("gameSelect")
+// const gameSelect = parseInt(selectElement.value);
+// console.log(gameSelect)
 
 
-// Tableau des images
-const images = [
-    "1", "2", "3", "4",
-    "5", "6"
-];
- 
+// Constantes
+const images = [1, 2, 3, 4,5, 6]; // Tableau des images
+let flippedCards = []; // Tableau des cartes retournées
+let lockBoard = false; // Blocage du plateau
+let oddFound = new Set() // Tableau contrôler la fin de la partie
+
 //dupliquer les cartes et le mélanger
 //... : opérateur qui décompose un tableau pour dupliquer, en gros ca transforme en deux imagesJeu
 //sort trie les elements, de maniere perso avec math random
-let shuffleImg = [...images, ...images].sort(() => 0.5 - Math.random());
+let doubleImages = [...images, ...images]
+
+function shuffleImg (doubleImages) { // Fonction pour mélanger le tableau d'images
+    for (let i = doubleImages.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = doubleImages[i];
+        doubleImages[i] = doubleImages[j];
+        doubleImages[j] = temp;
+    }
+    return doubleImages
+}
+const shuffleImages = shuffleImg(doubleImages)
 
 const plateauJeu = document.querySelector('.plateauJeu');
+console.log(plateauJeu);    //CONSOLE.LOG   
 
 // Créer les cartes dans le HTML
-shuffleImg.forEach((image) => {
-    const cards = document.createElement("div");
-    plateauJeu.appendChild(cards);
-    cards.classList.add("carte");
-    cards.dataset.image = image;
-    cards.innerHTML = `
-        <div >
-            <div class="">
-                <img src="medias/img${image}.png" alt="image" classe="mystery">
-            </div>
+shuffleImages.forEach((image) => {
+    const card = document.createElement("div");
+    plateauJeu.appendChild(card); // Ajoute les cartes comme enfant du plateau
+    card.classList.add("carte");  // 
+
+    console.log(card.classList); //CONSOLE.LOG
+
+    card.dataset.image = image; // Assigne le nom de l'image à la carte
+    console.log(card.dataset);  //CONSOLE.LOG
+    card.innerHTML = `
+        <div class="">
+            <img src="medias/img${image}.png" alt="image" class="mystery">
         </div>
     `;
+    console.log(`Carte créée pour image ${image}`); //CONSOLE.LOG
+
     // A pour effet de rendre invisible dès le départ
-    const imgElement = cards.querySelector('img');
+    const imgElement = card.querySelector('img');// Création d'un objet avec image comme sélecteur
+    console.log(imgElement); //CONSOLE.LOG
     imgElement.style.visibility = 'hidden'; // Rend l'image invisible
 
     // Action sur un clic
-    cards.addEventListener("click", () => {
-    cards.classList.add("flipped");
-    
-    // Lors du flip, rendre l'image visible
-    if (cards.classList.contains("flipped")) {
+    card.addEventListener("click", () => {
+        if (lockBoard === true || card.classList.contains("flipped") === true) {
+            return;
+        } //Vérifie si le plateau est bloqué ou si la carte est déjà retournée et bloque le click si vrai 
+        // Cela évite les clicks après deux sélection pendant le temps de latence de 3 secondes
 
-        imgElement.style.visibility = 'visible'; // Rendre l'image visible lors du flip
-    } else {
-        imgElement.style.visibility = 'hidden'; // Remettre l'image invisible lors du retour
-    }
+        card.classList.add("flipped"); // Retourne la carte
+        const img = card.querySelector('img'); // Indique l'image cliqué...
+        img.style.visibility = 'visible';//...et la rend visible
+        flippedCards.push(card); // Intègre la carte dans le tableau de comparaison des cartes retournées 
+ 
+        if (flippedCards.length === 2) {
+            lockBoard = true; // Permet de passer au blocage du plateau
+            const card1 = flippedCards[0]; // Récupération des infos de la première carte sélectionnée
+            const card2 = flippedCards[1]; // Récupération des infos de la seconde carte sélectionnée
+            if (card1.dataset.image === card2.dataset.image){ // Comparaison des attributs data des images
+                flippedCards = []; // Réinitialise le tableau de comparaison (Pas d'action sur les cartes)
+                lockBoard = false; // Réinitialise le blocage du tableau
+                oddFound.add(card.scr)
+                console.log(oddFound); //CONSOLE.LOG
+            }else{
+                setTimeout((event) => {
+                    event.
+                    card1.classList.remove("flipped"); // Retourne les...
+                    card2.classList.remove("flipped"); // .....les cartes
+                    card1.querySelector('img').style.visibility = 'hidden'; // Remet la visibilité ...
+                    card2.querySelector('img').style.visibility = 'hidden'; //      ... de la carte à 'hidden'
+                    flippedCards = []; // Réinitialise le tableau de comparaison (Pas d'action sur les cartes)
+                    lockBoard = false;
+                }), 3000;
+            };
+        };
     });
-
-});
-
-
-// const cptOdd = 0;
-// const cptMax = images.length;
-// do {
-
-// } while (cpt <=cptMax);
-    
-
-
-
-//     let i = 0 // compteur
-//     while (i<2) {
-//         i++;
-//     }
-        //  const tabControl = []
-        // tabControl.push = cards.src;
-// shuffleImg.forEach((image) => {
-// const cards = document.createElement("div");
-// cards.addEventListener("click", () => {
-//     // Contrôle des valeurs
-// const tabControl = []
-//     tabControl.push = cards.nodeName;
-//     console.log(tabControl);
-// // for (let i = 0; i < 2; i++) {
-
-    
-// // }
-// // if (tabControl[0]==tabControl[1]) {
-
-// // }
-// })
-// })
-
-
-
-
-
-
-// Créer les cartes mystères de remplacement des images
+    if (oddFound.size==images.length){
+        
+    }
+})
 
 
 
