@@ -4,13 +4,13 @@ function isEmailValid(email) {
     return regex.test(email);
 }
 
-// Fonction exportée qui retourne vrai ou faux
+// Fonction de validation lors de la saisie
 function isEmail(email) {
     if (!email) {
         return { valid: false, message: "Veuillez entrer un mail !" };
     }
 
-    if (!isEmail(email)) {
+    if (!isEmailValid(email)) {
         return { valid: false, message: "Vous n'avez pas rentré une adresse mail valide !" };
     }
 

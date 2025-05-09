@@ -1,9 +1,20 @@
-// Constantes
+const userJSON = localStorage.getItem("user");
+const user = JSON.parse(userJSON);
+console.log(user);
+const registeredUserName=user.userName;
+console.log(registeredUserName);
+
+document.getElementById('profileUserNameGame').textContent=`À vous de jouer, ${registeredUserName} !`;
+
+
+// Constantes & Variables
 const images = ["1", "2", "3", "4", "5", "6"]; // Tableau des images
 let flippedCards = []; // Tableau des cartes retournées
 let lockBoard = false; // Blocage du plateau
 let oddFound = 0; // Tableau contrôler la fin de la partie
 let cptTry=0; // Compteur du nombre d'essai
+let nbEssai = new Set();
+let Today = Date();
 
 // // Nombre de cartes
 // addEventListener("click", () => {
@@ -46,32 +57,35 @@ function shuffleImg (doubleImages) { // Fonction pour mélanger le tableau d'ima
 
 let shuffleImages = shuffleImg(doubleImages)
 
-let plateauJeu = document.querySelector('.plateauJeu');
+let deckGame = document.querySelector('.deckGame');
 // console.log(plateauJeu);    //CONSOLE.LOG   
 
 // Créer les cartes dans le HTML
 shuffleImages.forEach((image) => {
     let card = document.createElement("div");
-    plateauJeu.appendChild(card); // Ajoute les cartes comme enfant du plateau
-    card.classList.add("carte");  // 
+    deckGame.appendChild(card); // Ajoute les cartes comme enfant du plateau
+    card.classList.add("card");  // 
 
     // console.log(card.classList); //CONSOLE.LOG
 
     card.dataset.image = image; // Assigne le nom de l'image à la carte
     // console.log(card.dataset);  //CONSOLE.LOG
     card.innerHTML = `
-        <div class="">
-            <div class="card">
-                <img src="medias/img${image}.png" alt="image" class="">
+        <div class="card-inner">
+            <div class="card-front">
+                <img src="medias/question.png" alt="imagequestion">
             </div>
-        </div>   
+            <div class="card-back">
+                <img src="medias/img${image}.png" alt="image">
+            </div>
+        </div>
     `;
     // console.log(`Carte créée pour image ${image}`); //CONSOLE.LOG
 
     // A pour effet de rendre invisible dès le départ
     let imgElement = card.querySelector('img');// Création d'un objet avec image comme sélecteur
     // console.log(imgElement); //CONSOLE.LOG
-    imgElement.style.visibility = 'hidden'; // Rend l'image invisible
+
 
     // Détection de la touche espace
     addEventListener("keydown", (event) => {
@@ -82,7 +96,6 @@ shuffleImages.forEach((image) => {
 
     // Action sur un clic
     card.addEventListener("click", () => {
-        cptTry++;
         if (lockBoard === true || card.classList.contains("flipped") === true) {
             return;
         } //Vérifie si le plateau est bloqué ou si la carte est déjà retournée et bloque le click si vrai 
@@ -90,7 +103,6 @@ shuffleImages.forEach((image) => {
 
         card.classList.add("flipped"); // Retourne la carte
         let img = card.querySelector('img'); // Indique l'image cliqué...
-        img.style.visibility = 'visible';//...et la rend visible
         flippedCards.push(card); // Intègre la carte dans le tableau de comparaison des cartes retournées 
 
 
@@ -99,26 +111,37 @@ shuffleImages.forEach((image) => {
             let card1 = flippedCards[0]; // Récupération des infos de la première carte sélectionnée
             let card2 = flippedCards[1]; // Récupération des infos de la seconde carte sélectionnée
             if (card1.dataset.image === card2.dataset.image){ // Comparaison des attributs data des images
+                card1.classList.add("matched"); // Retourne les...
+                card2.classList.add("matched");
                 flippedCards = []; // Réinitialise le tableau de comparaison (Pas d'action sur les cartes)
                 lockBoard = false; // Réinitialise le blocage du tableau
                 oddFound++;
+                cptTry++;
+
                 if (oddFound==images.length){
-                    setTimeout(() =>{
-                        window.alert(`BRAVO!!! \n Vous avez fait ${cptTry} essais pour gagner la partie...`);
-                    },1000);
+
+                    document.getElementById('nbEssai').textContent=`Bravo!!!! Vous avez réalisé ${cptTry} essais pour finir le jeu!`;
+                    setTimeout(() => {
+                    const gameRegister = {
+                        userName: registeredUserName,
+                        score: cptTry,
+                        date: Today
+                    };
+                    localStorage.setItem("gameRegister", JSON.stringify(gameRegister));
+                    alert("Partie enregistrée !")
+                    }, 1500);
                 }
-                // console.log(oddFound); //CONSOLE.LOG
             }else{
                 setTimeout(() => {
                     card1.classList.remove("flipped"); // Retourne les...
                     card2.classList.remove("flipped"); // .....les cartes
-                    card1.querySelector('img').style.visibility = 'hidden'; // Remet la visibilité ...
-                    card2.querySelector('img').style.visibility = 'hidden'; //      ... de la carte à 'hidden'
                     flippedCards = []; // Réinitialise le tableau de comparaison (Pas d'action sur les cartes)
                     lockBoard = false;
+                    cptTry++;
+
                 }, 1500);
             };
         };
-
     });
 })
+

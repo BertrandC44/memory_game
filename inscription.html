@@ -19,30 +19,39 @@
             <ul>
                 <li><a href="index.html" aria-valuetext="ACCUEIL">ACCUEIL</a></li>
                 <li><a href="inscription.html" aria-valuetext="INSCRIPTION">S'INSCRIRE</a></li>
-                <li><a href="connexion.html" aria-valuetext="CONNEXION">CONNEXION</a></li>
+                <li><a href="connection.html" aria-valuetext="CONNEXION">CONNEXION</a></li>
                 <li><a href="profile.html" aria-valuetext="VOTRE PROFIL">PROFIL</a></li>
-                <li><a href="game.html" aria-valuetext="À VOUS DE JOUER">JOUER</a>
-                </li>
+                <li><a href="game.html" aria-valuetext="À VOUS DE JOUER">JOUER</a></li>
             </ul>
         </nav>
     </header>
 
-    <main class="mainRegistration">
-        <h5>Nom d'Utilisateur :</h5>
-        <input class="userName" type="text" name="userName" pattern="3 caractères minimum">
-        <h5>Entrez votre adresse email :</h5>
-        <input class="userMail" type="email" name="userMail">
-        <h5>Mot de passe :</h5>
-        <input class="userPassword" type="password" name="userPassword">
-        <h5>Veuillez valider votre mot de passe :</h5>
-        <input class="userPassword" type="password" name="userPassword">
-
-
-
+    <main class="registrationForm">
+        <form action="#" method="get" id="registrationForm">
+            <h4>-INSCRIVEZ-VOUS-</h4>
+            <h5>Nom d'Utilisateur :</h5>
+            <input class="userName" type="text" name="userName" id="userName" placeholder="6 caractères minimum"> <!-- Type "Text" et sans "required" pour permettre l'utilisation du module "isUserName"-->
+            <h5>Entrez votre adresse email :</h5>
+            <input class="userMail" type="text" name="userMail" id="userMail" placeholder="Votre email"> <!-- Type "Text" et sans "required" pour permettre l'utilisation du module "isEmail"-->
+            <h5>Mot de passe :</h5>
+            <input class="userPassword" type="password" name="userPassword" id="userPassword"
+                placeholder="Votre mot de passe - 6 caractères minimum + 1 majuscule + 1 caractère spécial "> <!-- Sans "required" pour permettre l'utilisation du module "isPassword"-->
+            <h5>Veuillez confirmer votre mot de passe :</h5>
+            <input class="userPasswordConfirm" type="password" name="userPasswordConfirm" id="userPasswordConfirm"
+                placeholder="Confirmer le mot de passe">
+            <div>
+                <button type="submit" class="submitRegistration">Création du compte</button>
+                <button type="reset" class="cancelRegistration">Annuler</button>
+            </div>
+        </form>
     </main>
-    <footer class="footer" id="idfooter"></footer>
-    <script type="module" src="./js/main.js"></script>
-    <script type="module" src="./modules/shuffle.js"></script>
+    <footer class="footer" id="idfooter">   
+    </footer>
+
+    <script type="module" src="js/inscription.js"></script>
+    <script type="module" src="modules/isUserName.js"></script>
+    <script type="module" src="modules/isEmail.js"></script>
+    <script type="module" src="modules/isPassword.js"></script>
 </body>
 
 </html>

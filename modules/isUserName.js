@@ -1,17 +1,18 @@
 // Vérifie la validité d'un userName
 function isUserNameValid(userName) {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
+    const regex = /([0-9_-]*[a-z][0-9_-]*){3}/;
+    return regex.test(userName);
 }
+console.log(isUserNameValid());
 
-// Fonction exportée qui retourne vrai ou faux
-function isUserName(email) {
-    if (!email) {
-        return { valid: false, message: "Veuillez entrer un mail !" };
+// Fonction de validation lors de la saisie
+function isUserName(userName) {
+    if (!userName) {
+        return { valid: false, message: "Vous n'avez pas rentré de nom d'utilisateur !" };
     }
 
-    if (!isUserName(email)) {
-        return { valid: false, message: "Vous n'avez pas rentré une adresse mail valide !" };
+    if (!isUserNameValid(userName)) {
+        return { valid: false, message: "Veuillez saisir au moins 3 caractères !" };
     }
 
     return { valid: true };

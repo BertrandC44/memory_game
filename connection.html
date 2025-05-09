@@ -21,29 +21,32 @@
                 <li><a href="inscription.html" aria-valuetext="INSCRIPTION">S'INSCRIRE</a></li>
                 <li><a href="connection.html" aria-valuetext="CONNEXION">CONNEXION</a></li>
                 <li><a href="profile.html" aria-valuetext="VOTRE PROFIL">PROFIL</a></li>
-                <li><a href="game.html" aria-valuetext="À VOUS DE JOUER">JOUER</a>
-                </li>
+                <li><a href="game.html" aria-valuetext="À VOUS DE JOUER">JOUER</a></li>
             </ul>
         </nav>
     </header>
-        <main class="mainProfile">
-            <h2>- PROFIL -</h2>
-            <img class="profileImg" src="medias/profil.png" alt="profilePicture">
-            <h3>Nom d'utilisateur :</h3>
-            <p id="profileUserName">
-            </p>
-            <h3>Email :</h3>
-            <div id="profileUserEmail">
-            </div>
+
+    <main class="connectionForm">
+        <form action="#" method="get" id="connectionForm">
+            <h4>- CONNECTEZ-VOUS -</h4>
+
+            <h5>Entrez votre adresse email :</h5>
+            <input class="userMail" type="text" name="userMail" id="userMail" placeholder="Votre email">
+            <h5>Mot de passe :</h5>
+            <input class="userPassword" type="password" name="userPassword" id="userPassword" placeholder="Votre mot de passe - 6 caractères minimum + 1 majuscule + 1 caractère spécial ">
             <div>
-                <button onclick="game.html" class="submitProfile">Jouer</button>
+                <button type="submit" class="submitRegistration">Se connecter</button>
+                <button type="reset" class="cancelRegistration">Annuler</button>
             </div>
-        </main>
+        </form>
+    </main>
     <footer class="footer" id="idfooter">
     </footer>
 
-    <script type="module" src="js/profile.js"></script>
-    
+    <script type="module" src="js/connection.js"></script>
+    <script type="module" src="modules/isUserName.js"></script>
+    <script type="module" src="modules/isEmail.js"></script>
+    <script type="module" src="modules/isPassword.js"></script>
 </body>
 
 </html>
